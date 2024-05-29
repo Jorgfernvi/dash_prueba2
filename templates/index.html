@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 10px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .pie-chart-container, .line-chart-container {
+            position: relative;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <nav class="nav flex-column">
+            <a class="nav-link active" href="#">Inicio</a>
+            <a class="nav-link" href="#">Ventas</a>
+            <a class="nav-link" href="#">Tiendas</a>
+            <a class="nav-link" href="#">Evaluaciones</a>
+        </nav>
+    </div>
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Ventas Anuales</h5>
+                            <p class="card-text">$221,324.50</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-secondary">
+                        <div class="card-body">
+                            <h5 class="card-title">Venta Proyectada</h5>
+                            <p class="card-text">$221,324.50</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title"># Tiendas Activas</h5>
+                            <p class="card-text">900</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-danger">
+                        <div class="card-body">
+                            <h5 class="card-title">Tiendas Cerradas</h5>
+                            <p class="card-text">12.8%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="line-chart-container">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pie-chart-container">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Distrito</th>
+                                <th>Población</th>
+                                <th>Gasto Food</th>
+                                <th># Tiendas</th>
+                                <th>Potencial</th>
+                                <th>Venta Anual</th>
+                                <th>% Captura</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jerry Mattei</td>
+                                <td>19 May, 2021</td>
+                                <td>251,661</td>
+                                <td>New York</td>
+                                <td>Yes</td>
+                                <td>Options</td>
+                                <td>Details</td>
+                            </tr>
+                            <tr>
+                                <td>Elianora Vasilov</td>
+                                <td>18 May, 2021</td>
+                                <td>173,534</td>
+                                <td>Ontario</td>
+                                <td>No</td>
+                                <td>Options</td>
+                                <td>Details</td>
+                            </tr>
+                            <tr>
+                                <td>Alvis Daen</td>
+                                <td>17 May, 2021</td>
+                                <td>874,661</td>
+                                <td>Milan</td>
+                                <td>Yes</td>
+                                <td>Options</td>
+                                <td>Details</td>
+                            </tr>
+                            <tr>
+                                <td>Lissa Shipsey</td>
+                                <td>23 Apr, 2021</td>
+                                <td>541,661</td>
+                                <td>San Francisco</td>
+                                <td>Yes</td>
+                                <td>Options</td>
+                                <td>Details</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var ctxLine = document.getElementById('lineChart').getContext('2d');
+        var lineChart = new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'Ventas Mensuales',
+                    data: [12000, 19000, 3000, 5000, 2000, 3000, 7000, 10000, 12000, 15000],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var ctxPie = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Frescos', 'Frutas y Verduras', 'Lácteos'],
+                datasets: [{
+                    label: 'Categorías',
+                    data: [60, 30, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+</html>
