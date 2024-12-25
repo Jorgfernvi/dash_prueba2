@@ -1,1 +1,5 @@
-Flask==2.0.2
+Dash
+pandas==1.3.5 
+numpy==1.21.6
+db-dtypes
+google-cloud-bigquery
